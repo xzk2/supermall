@@ -53,7 +53,7 @@ export default {
       this.$emit("pullingUp");
     });
 
-    // this.scroll.refresh();
+    this.scroll.refresh();
   },
   methods: {
     scrollTo(x, y, time = 300) {
@@ -61,8 +61,11 @@ export default {
     },
     finishPullUp() {
       this.scroll.finishPullUp();
-      this.scroll.refresh();
+      // this.scroll.refresh();
     }, //上拉一次后可以继续上拉，不过没有这个的或只能上拉一次
+    activated() {
+      this.scroll.refresh(); //将页面刷新 防止数据进来的时候高度没有调整导致不能滑动
+    },
   },
 };
 </script>
