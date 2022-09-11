@@ -21,6 +21,7 @@
     </scroll>
     <back-top @click.native="backClick" v-show="isShowBackTop" />
     <detail-bottom-bar @addToCart="addToCart" />
+    <!-- <toast /> -->
   </div>
 </template>
 
@@ -36,6 +37,7 @@ import DetailBottomBar from "./childComps/DetailBottomBar.vue";
 
 import Scroll from "components/common/scroll/Scroll";
 import GoodsList from "components/content/goods/GoodsList";
+// import Toast from "components/common/toast/Toast";
 import { backTopMixin } from "common/mixin";
 
 import {
@@ -61,6 +63,7 @@ export default {
 
     Scroll,
     GoodsList,
+    // Toast,
   },
   mixins: [backTopMixin],
   data() {
@@ -182,7 +185,10 @@ export default {
       product.iid = this.iid;
 
       //2.将商品添加到购物车
-      this.$store.dispatch("addCart", product);
+      this.$store.dispatch("addCart", product).then((res) => {
+        this.$toast.show(res, 2000);
+        console.log(this.$toast);
+      });
     },
   },
 };
